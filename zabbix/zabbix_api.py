@@ -103,7 +103,7 @@ class ZabbixAPI(object):
     # log_level: logging level
     # r_query_len: max len query history
     # **kwargs: Data to pass to each api module
-    def __init__(self, server='http://localhost/zabbix', user=None, passwd=None, 
+    def __init__(self, server='http://localhost/zabbix', user=None, passwd=None,
                  log_level = logging.WARNING, timeout = 10, r_query_len = 10, **kwargs):
         """ Create an API object.  """
         self._setuplogging()
@@ -153,7 +153,7 @@ class ZabbixAPI(object):
     def recent_query(self):
         """
         return recent query
-        """ 
+        """
         return list(self.r_query)
     def debug(self, level, var="", msg=None):
         strval = str(level) + ": "
@@ -232,10 +232,10 @@ class ZabbixAPI(object):
             opener=urllib2.build_opener(http_handler)
         else:
             raise ZabbixAPIException("Unknow protocol %s"%self.proto)
-        
+
         urllib2.install_opener(opener)
         response=opener.open(request, timeout = self.timeout)
-        
+
         self.debug(logging.INFO, "Response Code: " + str(response.code))
 
         # NOTE: Getting a 412 response code means the headers are not in the
@@ -287,7 +287,7 @@ class ZabbixAPISubClass(ZabbixAPI):
         self.debug(logging.INFO,"Creating %s"%self.__class__.__name__)
 
         self.parent = parent
-        # Save any extra info passed in 
+        # Save any extra info passed in
         for key,val in kwargs.items():
             setattr(self,key,val)
             self.debug(logging.WARNING,"Set %s:%s"%(repr(key),repr(val)))
@@ -809,7 +809,7 @@ class ZabbixAPIItem(ZabbixAPISubClass):
  * @return array|int item data as array or false if error
 """
         return opts
-    
+
     @dojson('item.getObjects')
     @checkauth
     def getObjects(self,**opts):
@@ -911,9 +911,9 @@ class ZabbixAPIItem(ZabbixAPISubClass):
  * @return deleted items
 """
         return opts
-    
+
 class ZabbixAPIUserGroup(ZabbixAPISubClass):
-    
+
     @dojson('usergroup.get')
     @checkauth
     def get(self,**opts):
@@ -941,7 +941,7 @@ class ZabbixAPIUserGroup(ZabbixAPISubClass):
  * @return array
 """
         return opts
-    
+
     @dojson('usergroup.create')
     @checkauth
     def create(self,**opts):
@@ -966,7 +966,7 @@ class ZabbixAPIUserGroup(ZabbixAPISubClass):
     @checkauth
     def massUpdate(self,**opts):
         return opts
-    
+
     @dojson('usergroup.update')
     @checkauth
     def update(self,**opts):
@@ -982,7 +982,7 @@ class ZabbixAPIUserGroup(ZabbixAPISubClass):
  * @return boolean
 """
         return opts
- 
+
     @dojson('usergroup.delete')
     @checkauth
     def delete(self,**opts):
@@ -1273,7 +1273,7 @@ class ZabbixAPIApplication(ZabbixAPISubClass):
  * @param array $data['items']
  * @return boolean
 """
-        return opts 
+        return opts
 
 class ZabbixAPITrigger(ZabbixAPISubClass):
 
@@ -1303,7 +1303,7 @@ class ZabbixAPITrigger(ZabbixAPISubClass):
  * @param array $options['order']
  * @return array|int item data as array or false if error
 """
-        return opts 
+        return opts
 
     @dojson('trigger.getObjects')
     @checkauth
@@ -1322,7 +1322,7 @@ class ZabbixAPITrigger(ZabbixAPISubClass):
  * @param array $triggers[0,...]['hostid'] OPTIONAL
  * @param array $triggers[0,...]['description'] OPTIONAL
 """
-        return opts 
+        return opts
 
     @dojson('trigger.create')
     @checkauth
@@ -1346,7 +1346,7 @@ class ZabbixAPITrigger(ZabbixAPISubClass):
  * @param array $triggers[0,...]['templateid'] OPTIONAL
  * @return boolean
 """
-        return opts 
+        return opts
 
     @dojson('trigger.update')
     @checkauth
@@ -1370,7 +1370,7 @@ class ZabbixAPITrigger(ZabbixAPISubClass):
  * @param array $triggers[0,...]['templateid'] OPTIONAL
  * @return boolean
 """
-        return opts 
+        return opts
 
     @dojson('trigger.delete')
     @checkauth
@@ -1387,7 +1387,7 @@ class ZabbixAPITrigger(ZabbixAPISubClass):
  * @param array $triggers[0,...]['triggerid']
  * @return deleted triggers
 """
-        return opts 
+        return opts
 
     @dojson('trigger.addDependencies')
     @checkauth
@@ -1405,7 +1405,7 @@ class ZabbixAPITrigger(ZabbixAPISubClass):
  * @param array $triggers_data['depends_on_triggerid']
  * @return boolean
 """
-        return opts 
+        return opts
 
     @dojson('trigger.deleteDependencies')
     @checkauth
@@ -1624,7 +1624,7 @@ class ZabbixAPITemplate(ZabbixAPISubClass):
 # * @param array $template_data['host']
 # * @return string templateid
 #"""
-#        return opts 
+#        return opts
 
     @dojson('template.create')
     @checkauth
@@ -2098,7 +2098,7 @@ class ZabbixAPIEvent(ZabbixAPISubClass):
     @dojson('event.acknowledge')
     @checkauth
     def acknowledge(self,**opts):
-        """ 
+        """
         events
         eventids
         triggers
@@ -2739,7 +2739,7 @@ class ZabbixAPIDRule(ZabbixAPISubClass):
     @checkauth
     def get(self,**opts):
         return opts
-    
+
 class ZabbixAPIUserMacro(ZabbixAPISubClass):
     @dojson('usermacro.get')
     @checkauth
@@ -2988,10 +2988,10 @@ class ZabbixAPIUserMacro(ZabbixAPISubClass):
     @dojson('usermacro.resolveItem')
     @checkauth
     def resolveItem(self,**opts):
-        """ 
+        """
 """
-        return opts 
-    
+        return opts
+
 class ZabbixAPIHistory(ZabbixAPISubClass):
     @dojson('history.get')
     @checkauth
@@ -3029,4 +3029,4 @@ class ZabbixAPIMaintenance(ZabbixAPISubClass):
     @dojson('maintenance.update')
     @checkauth
     def update(self,**opts):
-        return opts    
+        return opts

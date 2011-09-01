@@ -33,7 +33,6 @@ import string
 import sys
 import urllib2
 import re
-from socket import gaierror
 from collections import deque
 
 default_log_handler = logging.StreamHandler(sys.stdout)

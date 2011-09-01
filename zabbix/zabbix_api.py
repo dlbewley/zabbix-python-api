@@ -32,7 +32,6 @@ import logging
 import string
 import sys
 import urllib2
-import json
 import re
 from socket import gaierror
 from collections import deque
@@ -43,11 +42,11 @@ __logger.addHandler(default_log_handler)
 __logger.log(10,"Starting logging")
 
 try:
-    # Python 2.5+
+    # Python 2.6+
     import json
     __logger.log(15,"Using native json library")
 except ImportError:
-    # Python 2.4
+    # Python 2.5 and older
     import simplejson as json
     __logger.log(15,"Using simplejson library")
 
